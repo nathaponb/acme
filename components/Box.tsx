@@ -6,24 +6,24 @@ import { Mesh } from 'three';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 
-import { Model } from '../public/Plant';
+import { Model } from '../public/Icecream';
 
 export default function Box(props: any) {
   const ref = useRef<Mesh>(null!);
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full border-2 border-rose-500">
       <Canvas
         className="h-full"
         shadows
-        camera={{ position: [-30, 20, 0], fov: 5 }}
+        camera={{ position: [-30, 10, 0], fov: 5 }}
       >
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[0, 0, 5]} castShadow />
+        <ambientLight intensity={1} />
+        <directionalLight position={[10, 0, 5]} />
         {/* <mesh {...props} ref={ref}>
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial color="hotpink" />
         </mesh> */}
-        <Model position={[0, -0.5, 0]} />
+        <Model position={[0, -1, 0]} />
         <OrbitControls autoRotate autoRotateSpeed={2} />
       </Canvas>
     </div>
