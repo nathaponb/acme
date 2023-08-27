@@ -1,4 +1,5 @@
 import React from 'react';
+import { getPosts } from '../page';
 
 export default function page({ params }: { params: { slug: string } }) {
   // todo: grab slug and fetch specific post
@@ -9,4 +10,17 @@ export default function page({ params }: { params: { slug: string } }) {
       </div>
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  console.log('generateStaticParams get called');
+  const posts = await getPosts();
+
+  if (!posts) {
+    return;
+  }
+
+  return posts.map((post: any) => ({
+    slug: post.slug
+  }));
 }

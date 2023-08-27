@@ -1,5 +1,14 @@
 import React from 'react';
-import GhostContentAPI from '@tryghost/content-api';
+import GhostContentAPI, { PostsOrPages } from '@tryghost/content-api';
+import Link from 'next/link';
+
+interface Blog {
+  id: string;
+  title: string;
+  slug: string;
+  feature_image: null | string;
+  published_at: Date;
+}
 
 const api = new GhostContentAPI({
   url: 'http://localhost:2368',
@@ -7,10 +16,11 @@ const api = new GhostContentAPI({
   version: 'v5.0'
 });
 
-export async function getPosts() {
+export async function getPosts(): Promise<void | PostsOrPages> {
   return await api.posts
     .browse({
-      limit: 'all'
+      limit: 'all',
+      fields: ['id', 'title', 'slug', 'feature_image', 'published_at']
     })
     .catch((err) => {
       console.error(err);
@@ -23,10 +33,30 @@ export default async function page() {
   console.log('blogs');
   console.log(data);
 
+  if (!data) {
+    return <p>render 404 page</p>;
+  }
+
+  // data.map((item) => {
+  //   console.log('from item');
+  //   console.log(item.title);
+  // });
+
   return (
     <div className="h-full w-full flex justify-center items-center">
       <div className="h-full w-3/5">
         <h1 className="text-xl">Blog post page</h1>
+
+        <ul className="flex flex-col mt-5">
+          {data.map((item) => (
+            <div className="mb-5">
+              <Link className="hover:underline" href={'blogs/' + item.slug}>
+                {item.title}
+              </Link>
+              <p>{item.id}</p>
+            </div>
+          ))}
+        </ul>
       </div>
     </div>
   );
