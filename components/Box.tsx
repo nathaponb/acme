@@ -11,7 +11,7 @@ import { Model } from '../public/Icecream';
 export default function Box(props: any) {
   const ref = useRef<Mesh>(null!);
   return (
-    <div className="w-full h-full border-2 border-rose-500">
+    <div className="h-full border-2 border-rose-500">
       <Canvas
         className="h-full"
         shadows
