@@ -10,7 +10,7 @@ interface Blog {
   published_at: Date;
 }
 
-const api = new GhostContentAPI({
+export const api = new GhostContentAPI({
   url: 'http://localhost:2368',
   key: 'f6cdaf35e6086d43cbb0d70cbb',
   version: 'v5.0'
@@ -29,9 +29,6 @@ export async function getPosts(): Promise<void | PostsOrPages> {
 
 export default async function page() {
   const data = await getPosts();
-
-  console.log('blogs');
-  console.log(data);
 
   if (!data) {
     return <p>render 404 page</p>;
