@@ -2,7 +2,7 @@ import React from 'react';
 import GhostContentAPI, { PostsOrPages } from '@tryghost/content-api';
 import Link from 'next/link';
 
-interface Blog {
+export interface Blog {
   id: string;
   title: string;
   slug: string;
@@ -44,7 +44,7 @@ export default async function page() {
       <div className="h-full w-3/5">
         <h1 className="text-xl">Blog post page</h1>
 
-        <ul className="flex flex-col mt-5">
+        <div className="flex flex-col mt-5">
           {data.map((item) => (
             <div className="mb-5">
               <Link className="hover:underline" href={'blogs/' + item.slug}>
@@ -53,7 +53,7 @@ export default async function page() {
               <p>{item.id}</p>
             </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );
